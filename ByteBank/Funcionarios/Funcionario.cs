@@ -6,16 +6,28 @@ using System.Threading.Tasks;
 
 namespace ByteBank.Funcionarios
 {
-    public class Funcionario
+    public abstract class Funcionario
     {   
      
         public string Nome { get; set; }
-        public string CPF { get; set; }
-        public double Salario { get; set; }
-             
-        public virtual double GetBonificacao() //é um método virtual e pode ser utilizado para as classes derivadas do funcionário
+        public string CPF { get; private set; }
+        public double Salario { get; protected set; }
+
+        public static int TotalDeFuncionarios { get; private set; }
+
+        // os construtores das bases derivadas sempres chamam o construtor da classe base
+        //é necessário preencher o argumento do construtor da classe base na classe derivada
+        public Funcionario(double salario, string cpf) //construtor 
         {
-            return Salario * 0.10;
+            TotalDeFuncionarios++;
+            CPF = cpf;
+            Salario = salario;
         }
+
+        //adicionar o modificador virtual nas classes derivadas (override) que vão utilizar esse método.
+        public abstract void AumentarSalario();
+      
+        public abstract double GetBonificacao(); // um método abstrato só pode ser declarado se a sua classe raiz for abtsrata.
+       
     }
 }

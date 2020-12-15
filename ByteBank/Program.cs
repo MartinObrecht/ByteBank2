@@ -12,18 +12,13 @@ namespace ByteBank
     {
         static void Main(string[] args)
         {
-            GerenciadorBonificacao gerenciador = new GerenciadorBonificacao(); // Construtor
+            GerenciadorBonificacao gerenciador = new GerenciadorBonificacao();
 
-            Funcionario carlos = new Funcionario(); // Construtor
+            Funcionario carlos = new Auxiliar("546.879.157-20");
             carlos.Nome = "Carlos";
-            carlos.CPF = "546.879.157-20";
-            carlos.Salario = 2000;
 
-            Diretor roberta = new Diretor();// Construtor
+            Diretor roberta = new Diretor("454.658.48-3"); 
             roberta.Nome = "Roberta";
-            roberta.CPF = "454.658.48-3";
-            roberta.Salario = 5000;
-
 
             gerenciador.Registrar(carlos);
             gerenciador.Registrar(roberta);
