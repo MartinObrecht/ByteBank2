@@ -10,11 +10,29 @@ namespace ByteBank
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
-            // CalcularBonificacao(); 
+            Cliente martin = new Cliente("Martin", "Obrecht", "552.568.898-30", 21011989);
+            martin.Endereco = "Rua Serra, 180 - Guarulhos";
+            martin.Profissao = "Engenheiro de Software";
+            martin.Renda = 11000;
 
-            UsarSistema();
+            Cliente flavia = new Cliente("Anna Flavia", "Stutz", "448.561.418-30", 30071992);
+            flavia.Endereco = "Rua Serra, 180 - Guarulhos";
+            flavia.Profissao = "Analista de Câmbio";
+            flavia.Renda = 6000;
+
+            ContaCorrente contaMartin = new ContaCorrente(martin, "0706", "0706001");
+            ContaCorrente contaFlavia = new ContaCorrente(flavia, "0706", "0706002");
+
+            contaMartin.Saldo = 2000;
+            Console.WriteLine("Saldo conta Martin: " + contaMartin.Saldo);
+
+            contaMartin.Transferir(1850, contaFlavia);
+            Console.WriteLine("Saldo conta Martin: " + contaMartin.Saldo);
+            Console.WriteLine("Saldo conta Flavia: " + contaFlavia.Saldo);
+
 
             Console.ReadLine();
         }
