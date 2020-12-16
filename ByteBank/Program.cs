@@ -14,12 +14,12 @@ namespace ByteBank
         static void Main(string[] args)
         {
             Cliente martin = new Cliente("Martin", "Obrecht", "552.568.898-30", 21011989);
-            martin.Endereco = "Rua Serra, 180 - Guarulhos";
+            martin.Endereco = "Rua Fidalga, 180 - Centro";
             martin.Profissao = "Engenheiro de Software";
             martin.Renda = 11000;
 
             Cliente flavia = new Cliente("Anna Flavia", "Stutz", "448.561.418-30", 30071992);
-            flavia.Endereco = "Rua Serra, 180 - Guarulhos";
+            flavia.Endereco = "Rua Fidalga, 180 - Centro";
             flavia.Profissao = "Analista de Câmbio";
             flavia.Renda = 6000;
 
