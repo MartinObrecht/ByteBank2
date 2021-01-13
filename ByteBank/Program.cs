@@ -10,81 +10,46 @@ namespace ByteBank
 {
     class Program
     {
-        
+
         static void Main(string[] args)
         {
+
             Cliente martin = new Cliente("Martin", "Obrecht", "552.568.898-30", 21011989);
             martin.Endereco = "Rua Fidalga, 180 - Centro";
             martin.Profissao = "Engenheiro de Software";
             martin.Renda = 11000;
 
-            Cliente flavia = new Cliente("Anna Flavia", "Stutz", "448.561.418-30", 30071992);
-            flavia.Endereco = "Rua Fidalga, 180 - Centro";
-            flavia.Profissao = "Analista de Câmbio";
-            flavia.Renda = 6000;
+            try
+            {
+                ContaCorrente conta = new ContaCorrente(martin, 455, 18665);
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.ParamName);
+            }
 
-            ContaCorrente contaMartin = new ContaCorrente(martin, "0706", "0706001");
-            ContaCorrente contaFlavia = new ContaCorrente(flavia, "0706", "0706002");
+            try
+            {
+                ContaCorrente conta1 = new ContaCorrente(martin, 4564, 789684);
+                ContaCorrente conta2 = new ContaCorrente(martin , 456794, 788854);
 
-            contaMartin.Saldo = 2000;
-            Console.WriteLine("Saldo conta Martin: " + contaMartin.Saldo);
+                // conta1.Transferir(10000, conta2);
+                conta1.Sacar(10000);
+            }
+            catch (OperacaoFinanceiraException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
 
-            contaMartin.Transferir(1850, contaFlavia);
-            Console.WriteLine("Saldo conta Martin: " + contaMartin.Saldo);
-            Console.WriteLine("Saldo conta Flavia: " + contaFlavia.Saldo);
+                Console.WriteLine("Informações da INNER EXCEPTION (exceção interna):");
 
+                Console.WriteLine(e.InnerException.Message);
+                Console.WriteLine(e.InnerException.StackTrace);
+            }
 
             Console.ReadLine();
-        }
 
-        public static void UsarSistema()
-        {
-            SistemaInterno sistemaInterno = new SistemaInterno();
-
-            Diretor roberta = new Diretor("159.753.398-04");
-            roberta.Nome = "Roberta";
-            roberta.Senha = "123";
-
-            GerenteDeConta camila = new GerenteDeConta("326.985.628-89");
-            camila.Nome = "Camila";
-            camila.Senha = "abc";
-
-            ParceiroComercial parceiro = new ParceiroComercial();
-            parceiro.Senha = "123456";
-
-            sistemaInterno.Logar(parceiro, "123456");
-
-            sistemaInterno.Logar(roberta, "123");
-            sistemaInterno.Logar(camila, "abc");
-        }
-
-        public static void CalcularBonificacao()
-        {
-            GerenciadorBonificacao gerenciadorBonificacao = new GerenciadorBonificacao();
-
-            Funcionario pedro = new Designer("833.222.048-39");
-            pedro.Nome = "Pedro";
-
-            Funcionario roberta = new Diretor("159.753.398-04");
-            roberta.Nome = "Roberta";
-
-            Funcionario igor = new Auxiliar("981.198.778-53");
-            igor.Nome = "Igor";
-
-            Funcionario camila = new GerenteDeConta("326.985.628-89");
-            camila.Nome = "Camila";
-
-            Desenvolvedor guilherme = new Desenvolvedor("456.175.468-20");
-            guilherme.Nome = "Guilherme";
-
-            gerenciadorBonificacao.Registrar(guilherme);
-            gerenciadorBonificacao.Registrar(pedro);
-            gerenciadorBonificacao.Registrar(roberta);
-            gerenciadorBonificacao.Registrar(igor);
-            gerenciadorBonificacao.Registrar(camila);
-
-            Console.WriteLine("Total de bonificações do mês " +
-                gerenciadorBonificacao.GetTotalBonificacao());
-        }
+        }                    
     }
 }
