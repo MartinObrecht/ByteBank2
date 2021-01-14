@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ByteBank.Funcionarios
+namespace ByteBank.Modelos.Funcionarios
 {
     public class Desenvolvedor : Funcionario
     {
@@ -17,7 +17,7 @@ namespace ByteBank.Funcionarios
             Salario *= 0.15;
         }
 
-        public override double GetBonificacao()
+        internal protected override double GetBonificacao()
         {
             return Salario * 0.1;
         }
